@@ -1,0 +1,17 @@
+<h1>Animal Shleter</h1>
+<form action="/" method="post">
+  <label for="species">What species is your animal?</label>
+  <input type="text" name="species">
+  <button type="submit" name="button">Submit</button>
+</form>
+
+<form action="/delete" method="post">
+  <button type="submit" name="button">Delete All Species</button>
+</form>
+
+<ul>
+  @foreach (var species in @Model)
+  {
+    <li><a href="/species/@species.GetSpeciesId()">@species.GetType()<a></li>
+  }
+</ul>

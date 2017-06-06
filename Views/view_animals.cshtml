@@ -1,0 +1,22 @@
+<h1>Animals!!</h1>
+
+<form action='/species/@Model["species"].GetSpeciesId()' method="post">
+  <label for="animal-name">Animal Name: </label>
+  <input type="text" name="animal-name">
+  <label for="animal-date">Animal Date: </label>
+  <input type="text" name="animal-date">
+  <label for="animal-gender">Animal Gender: </label>
+  <input type="text" name="animal-gender">
+  <input type="hidden" name="species-id" value='@Model["species"].GetSpeciesId()'>
+  <button type="submit" name="button">Submit</button>
+</form>
+<ul>
+  @foreach (var animal in @Model["animals"])
+  {
+    <li>@animal.GetName()</li>
+    <li>@animal.GetDate()</li>
+    <li>@animal.GetGender()</li>
+    <li>---------------------</li>
+
+  }
+</ul>
