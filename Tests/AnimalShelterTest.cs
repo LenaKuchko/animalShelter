@@ -45,13 +45,11 @@ namespace AnimalShelter
       Assert.Equal(animalOne, animalTwo);
     }
 
-
     [Fact]
      public void Test_Species_Save_SaveToDataBase()
      {
        //Arrange
        Species testSpecies = new Species("Chinchilla");
-
 
        //Act
        testSpecies.Save();
@@ -68,7 +66,6 @@ namespace AnimalShelter
         //Arrange
         Animal testAnimal = new Animal("06/06/2017", "Female", "Bella", 1);
 
-
         //Act
         testAnimal.Save();
         List<Animal> result = Animal.GetAll();
@@ -78,7 +75,23 @@ namespace AnimalShelter
         Assert.Equal(testList, result);
       }
 
+      [Fact]
+      public void Test_Update_UpdatesSpeciesInDatabase()
+      {
+        //Arrange
+        string testType = "Cat";
+        Species testSpecies = new Species(testType);
+        testSpecies.Save();
+        string newType = "Mouse";
 
+        //Act
+        testSpecies.Update(newType);
+
+        string result = testSpecies.GetType();
+
+        //Assert
+        Assert.Equal(newType, result);
+      }
 
     public void Dispose()
     {

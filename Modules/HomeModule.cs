@@ -45,6 +45,11 @@ namespace AnimalShelter
         List<Species> allSpecies = Species.GetAll();
         return View["index.cshtml", allSpecies];
       };
+
+      Get["type/edit/{id}"] = parameters => {
+        Species SelectedSpecies = Species.FindSpecies(parameters.id);
+        return View["species_edit.cshtml", SelectedSpecies];
+      };
     }
   }
 }

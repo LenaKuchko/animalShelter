@@ -137,5 +137,38 @@ namespace AnimalShelter
         conn.Close();
       }
     }
+
+    public void Update(string newType)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE species SET type = @NewType OUTPUT INSERTED.type WHERE id = @SpeciesId;", conn);
+
+      SqlParameter newTypeParameter = new SqlParameter();
+      newTypeParameter.ParameterName = "@NewType";
+      newTypeParameter.Value = newType;
+      cmd.Parameters.Add(newTypeParameter);
+
+      SqlParameter speciesIdParameter = new SqlParameter();
+      speciesIdParameter.ParameterName = "@SpeciesId";
+      speciesIdParameter.Value = this.GetSpeciesId();
+      cmd.Parameters.Add(speciesIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._type = rdr.GetString(0);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (rdr != null)
+      {
+        conn.Close();
+      }
+    }
   }
 }
